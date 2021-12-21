@@ -1,0 +1,72 @@
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "term": { "live": true } },
+        [
+          {
+            "bool": {
+              "minimum_should_match": "100%",
+              "should": [
+                {
+                  "query_string": {
+                    "fields": ["unsw_psubject.implementationYear"],
+                    "query": "*2022*"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "bool": {
+              "minimum_should_match": "100%",
+              "should": [
+                {
+                  "query_string": {
+                    "fields": ["unsw_psubject.studyLevelValue"],
+                    "query": "*ugrd*"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "bool": {
+              "minimum_should_match": "100%",
+              "should": [
+                {
+                  "query_string": {
+                    "fields": ["unsw_psubject.active"],
+                    "query": "*1*"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "bool": {
+              "minimum_should_match": "100%",
+              "should": [
+                {
+                  "query_string": {
+                    "fields": ["unsw_psubject.educationalArea"],
+                    "query": "*COMP*"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      ],
+      "filter": [{ "terms": { "contenttype": ["unsw_psubject"] } }]
+    }
+  },
+  "sort": [{ "unsw_psubject.code_dotraw": { "order": "asc" } }],
+  "from": 0,
+  "size": 2,
+  "track_scores": true,
+  "_source": {
+    "includes": ["*.code", "*.name"],
+    "excludes": ["", null]
+  }
+}
