@@ -6,5 +6,5 @@ Script for searching the UNSW Handbook for Computer Science courses available in
 
 TODO:
 
-- [ ] Generalise for year
-- [ ] Generalise for subject area
+- [x] Generalise for year
+- [x] Generalise for subject area
